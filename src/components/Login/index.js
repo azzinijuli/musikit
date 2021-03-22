@@ -1,9 +1,14 @@
 import React from 'react'
 
 function Login(){
+  const baseUrl = `https://accounts.spotify.com/authorize`
+  const clientId = `9d970c471e104a17a5d533ce0458c4f6`
+  const responseType = `token`
+  const redirectUri = `http://localhost:3000/dashboard`
+  const scope = `user-read-recently-played`
 
   return(
-    <a href="https://accounts.spotify.com/authorize?client_id=9d970c471e104a17a5d533ce0458c4f6&response_type=token&redirect_uri=http://localhost:3000/dashboard">Login</a>
+    <a href={`${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`}>Login</a>
   )
 }
 
