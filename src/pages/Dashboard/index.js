@@ -11,6 +11,7 @@ function Dashboard() {
   const accessToken = fullHash.split("=");
   const [dataPlaylists, setDataPlaylist] = useState([]);
   const [recently, setRecently] = useState([]);
+  const [podcasts, setPodcasts] = useState([]);
 
   useEffect(() => {
     fetchData("https://api.spotify.com/v1/me/playlists", setDataPlaylist);
@@ -18,6 +19,7 @@ function Dashboard() {
       "https://api.spotify.com/v1/me/player/recently-played",
       setRecently
     );
+    fetchData("https://api.spotify.com/v1/me/shows", setPodcasts);
   }, []);
 
   async function fetchData(url, setter) {
@@ -28,14 +30,13 @@ function Dashboard() {
     });
     const json = await data.json();
     setter(json);
-    console.log("soy los datos", json);
   }
 
   return (
     <div>
       <Navbar />
       <Sidebar />
-      <Carousel />
+      <Carousel podcasts={podcasts} />
       <Footer />
     </div>
   );
